@@ -6,6 +6,13 @@ import HomeLayout from '../components/Layout/HomeLayout'
 import Home from '../pages/Home'
 import Cart from '../pages/Cart'
 
+export const navigation = [
+  { name: 'Home', to: '/home' },
+  { name: 'Products', to: '/products' },
+  { name: 'News', to: '/news' },
+  { name: 'Contact', to: '/contact' },
+]
+
 export const publicRoutes = [
   { path: '/', component: Home, layout: HomeLayout },
   { path: '/home', component: Home, layout: HomeLayout },

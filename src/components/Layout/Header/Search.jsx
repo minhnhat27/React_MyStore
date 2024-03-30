@@ -1,7 +1,6 @@
 import Input from '../../UI/Input'
 import Wrapper from '../../Wrapper'
 import Button from '../../UI/Button'
-import style from './Header.module.scss'
 import { debounce } from '../../../services/userService'
 
 import Tippy from '@tippyjs/react/headless'
@@ -55,14 +54,12 @@ export default function Search() {
         placement="bottom-end"
         render={(attrs) => (
           <div className="lg:w-72 md:w-52 w-48" tabIndex="-1" {...attrs}>
-            <Wrapper className="p-2 max-h-80">
+            <Wrapper className="p-2 max-h-80 rounded-sm">
               {searchResult.length > 0 && (
                 <>
                   <div className="flex items-center">
                     <BsSearch className="w-4 h-4 mx-1 text-slate-500" />
-                    <span className="text-sm text-slate-500">
-                      Kết quả cho "{textSearch}"
-                    </span>
+                    <span className="text-sm text-slate-500">Kết quả cho "{textSearch}"</span>
                   </div>
                   <ul>
                     {searchResult.map((item, i) => (
@@ -73,12 +70,8 @@ export default function Search() {
               )}
               {loading && (
                 <div className="flex items-center">
-                  <div
-                    className={`${style.loader} rounded-full border-2 border-t-slate-500 border-slate-300 h-4 w-4 mx-1 animate-spin`}
-                  ></div>
-                  <span className="text-sm text-slate-500">
-                    Đang tìm "{textSearch}"
-                  </span>
+                  <div className="rounded-full border-2 border-t-slate-500 border-slate-300 h-4 w-4 mx-1 animate-spin"></div>
+                  <span className="text-sm text-slate-500">Đang tìm "{textSearch}"</span>
                 </div>
               )}
               {searchResult.length > 0 || loading || (
@@ -105,7 +98,7 @@ export default function Search() {
             onClick={() => setIsSearchExpand(true)}
             onChange={(e) => handleSearch(e)}
             value={textSearch}
-            className={`${style.search} lg:w-72 md:w-52 w-48 rounded-full py-1 px-10`}
+            className="border outline-blue-200 lg:w-72 md:w-52 w-48 rounded-full py-1 px-10"
             placeholder="Search"
             ref={searchRef}
           />

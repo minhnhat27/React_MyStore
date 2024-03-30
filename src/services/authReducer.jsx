@@ -1,6 +1,6 @@
 // const user = AuthService.getCurrentUser()
 export const initialState = {
-  isAuthenticated: true,
+  isAuthenticated: false,
 }
 // user !== null
 //   ? {

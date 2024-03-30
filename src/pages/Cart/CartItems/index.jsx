@@ -1,16 +1,12 @@
 import { useEffect, useState } from 'react'
 
-import Image from '../UI/Image'
-import Input from '../UI/Input'
-import Button from '../UI/Button'
-import formatter from '../../services/formatter'
-import Wrapper from '../Wrapper'
+import Image from '../../../components/UI/Image'
+import Input from '../../../components/UI/Input'
+import Button from '../../../components/UI/Button'
+import formatter from '../../../services/formatter'
+import Wrapper from '../../../components/Wrapper'
 
-export default function CartItems({
-  selectedProducts,
-  setSelectedProducts,
-  cartItems,
-}) {
+export default function CartItems({ selectedProducts, setSelectedProducts, cartItems }) {
   const [checkAll, setCheckAll] = useState(false)
 
   useEffect(() => {
@@ -50,9 +46,7 @@ export default function CartItems({
       <div className="px-5">
         <div className="flex justify-between">
           <h4 className="text-red-500 text-lg font-bold">Cart</h4>
-          <Button className="text-blue-500 hover:text-blue-400">
-            Delete All
-          </Button>
+          <Button className="text-blue-500 hover:text-blue-400">Delete All</Button>
         </div>
         <div>
           <Wrapper>
@@ -60,11 +54,7 @@ export default function CartItems({
               <thead className="text-center">
                 <tr className="font-bold border-b">
                   <td className="p-1">
-                    <Input
-                      type="checkbox"
-                      checked={checkAll}
-                      onChange={handleSelectAll}
-                    />
+                    <Input type="checkbox" checked={checkAll} onChange={handleSelectAll} />
                   </td>
                   <td colSpan={3} className="p-3 text-start">
                     Product
@@ -92,10 +82,7 @@ export default function CartItems({
                       </td>
                       <td className="w-40 text-start">{item.name}</td>
                       <td className="w-40 text-start">
-                        <label
-                          htmlFor="type"
-                          className="block mb-2 text-sm text-slate-500"
-                        >
+                        <label htmlFor="type" className="block mb-2 text-sm text-slate-500">
                           Variations
                         </label>
                         <select
@@ -111,9 +98,7 @@ export default function CartItems({
                         </select>
                       </td>
                       <td className="p-3">
-                        <div className="line-through text-slate-500">
-                          {formatter.format(item.price)}
-                        </div>
+                        <div className="line-through text-slate-500">{formatter.format(item.price)}</div>
                         <div>{formatter.format(item.price - dis)}</div>
                       </td>
                       <td className="p-3">
@@ -128,9 +113,7 @@ export default function CartItems({
                           <Input
                             type="number"
                             className="w-12 text-center p-1 outline-none border-t border-b"
-                            onChange={(e) =>
-                              handleChangeQuantity(e.target.value)
-                            }
+                            onChange={(e) => handleChangeQuantity(e.target.value)}
                             // value={item.quantity}
                           />
                           <Button
@@ -141,13 +124,9 @@ export default function CartItems({
                             +
                           </Button>
                         </div>
-                        <Button className="text-blue-500 p-0 mt-3 hover:text-blue-400">
-                          Delete
-                        </Button>
+                        <Button className="text-blue-500 p-0 mt-3 hover:text-blue-400">Delete</Button>
                       </td>
-                      <td className="p-3 text-red-500 font-medium">
-                        {formatter.format(tol)}
-                      </td>
+                      <td className="p-3 text-red-500 font-medium">{formatter.format(tol)}</td>
                     </tr>
                   )
                 })}
@@ -164,18 +143,13 @@ export default function CartItems({
               className="p-2 border mx-3 rounded-md focus:outline-blue-500"
               id="voucher"
             />
-            <Button
-              type="button"
-              className="rounded-md p-2 bg-blue-500 text-white font-semibold"
-            >
+            <Button type="button" className="rounded-md p-2 bg-blue-500 text-white font-semibold">
               Apply
             </Button>
           </div>
           <div className="mt-1">
             <span>Total ({selectedProducts.length} items): 100đ</span>
-            <Button className="border ml-3 p-2 rounded-sm bg-emerald-500 text-white">
-              Check out
-            </Button>
+            <Button className="border ml-3 p-2 rounded-sm bg-emerald-500 text-white">Check out</Button>
           </div>
         </Wrapper>
       </div>

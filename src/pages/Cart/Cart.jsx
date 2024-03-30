@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
 import Loading from '../../components/Loading'
-import CartItems from '../../components/CartItems/CartItems'
+import CartItems from './CartItems'
 
 export default function Cart() {
   const [loading] = useState(false)

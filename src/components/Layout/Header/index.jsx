@@ -1,26 +1,19 @@
 import Button from '../../UI/Button'
 import Image from '../../UI/Image'
 import Wrapper from '../../Wrapper'
-import style from './Header.module.scss'
 import { useAuth } from '../../../App'
 import logo from '../../../logo.svg'
 import Search from './Search'
 import Login from '../../Login'
 import Register from '../../Register'
 
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import { BsX, BsList, BsChevronLeft } from 'react-icons/bs'
 import { CSSTransition } from 'react-transition-group'
 import Offcanvas from './Offcanvas'
 import NavUser from './NavUser'
-
-const navigation = [
-  { name: 'Home', to: '/home', current: true },
-  { name: 'Products', to: '/products', current: false },
-  { name: 'News', to: '/news', current: false },
-  { name: 'Contact', to: '/contact', current: false },
-]
+import { navigation } from '../../../services/routes'
 
 export default function Header({ className }) {
   const { state } = useAuth()
@@ -80,7 +73,7 @@ export default function Header({ className }) {
   return (
     <>
       <div className={`${className} md:px-14 px-2 py-4 w-full`}>
-        <nav className={`${style.header} rounded-2xl`}>
+        <nav id="nav" className="border bg-white opacity-80 rounded-2xl">
           <div className="relative px-4 h-12 flex items-center justify-between">
             <div className="relative left-0 flex items-center md:hidden">
               <Button
@@ -97,18 +90,13 @@ export default function Header({ className }) {
                 </div>
                 <div className="flex space-x-2 md:ml-2">
                   {navigation.map((item, i) => (
-                    <Link
+                    <NavLink
                       key={i}
                       to={item.to}
-                      className={`${
-                        item.current
-                          ? 'bg-gray-700 text-white'
-                          : 'hover:bg-gray-400'
-                      } rounded-full 
-                      transition ease-in-out px-3 py-2 text-sm font-medium`}
+                      className="rounded-full transition ease-in-out px-3 py-2 text-sm font-medium hover:bg-emerald-100"
                     >
                       {item.name}
-                    </Link>
+                    </NavLink>
                   ))}
                 </div>
               </div>
@@ -132,17 +120,14 @@ export default function Header({ className }) {
         in={isSignIn || isSignUp}
         nodeRef={nodeRef}
         classNames="showSignIn"
+        timeout={1000}
         unmountOnExit
       >
         <div ref={nodeRef} className="fixed w-full z-50">
           <div className="relative min-h-screen flex items-center justify-center">
-            <div className="flex items-center justify-center lg:w-2/5 md:w-1/2 sm:w-3/4 w-11/12">
-              <Wrapper className="mb-0 px-10 py-5">
-                <div
-                  className={`flex ${
-                    isSignUp ? 'justify-between' : 'justify-end'
-                  }`}
-                >
+            <div className="overflow-auto flex items-center justify-center lg:w-2/5 md:w-1/2 sm:w-3/4 w-11/12">
+              <Wrapper className="mb-0 px-10 py-5 rounded-sm">
+                <div className={`flex ${isSignUp ? 'justify-between' : 'justify-end'}`}>
                   {isSignUp && (
                     <div
                       onClick={toggleSignIn}
@@ -159,13 +144,7 @@ export default function Header({ className }) {
                   </div>
                 </div>
                 <div className="relative flex items-center justify-center">
-                  <Image
-                    width="70"
-                    height="70"
-                    className="py-2 fs-4"
-                    src={logo}
-                    alt="logo"
-                  />
+                  <Image width="70" height="70" className="py-2 fs-4" src={logo} alt="logo" />
                 </div>
                 {isSignIn && <Login toggleSignUp={toggleSignUp} />}
                 {isSignUp && <Register toggleSignIn={toggleSignIn} />}

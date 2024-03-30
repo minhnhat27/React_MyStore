@@ -5,11 +5,7 @@ import Wrapper from '../../Wrapper'
 import Tippy from '@tippyjs/react/headless'
 import { BsBell, BsCart } from 'react-icons/bs'
 
-export default function NavUser({
-  isAuthenticated,
-  toggleSignIn,
-  toggleSignUp,
-}) {
+export default function NavUser({ isAuthenticated, toggleSignIn, toggleSignUp }) {
   return (
     <>
       {isAuthenticated ? (

@@ -3,14 +3,21 @@ import Input from '../../components/UI/Input'
 
 import { BsEye, BsEyeSlash } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Login({ toggleSignUp }) {
   const [showPassword, setShowPassword] = useState(false)
+  const [regSuccess, setRegSuccess] = useState(false)
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword)
   }
+
+  useEffect(() => {
+    const reg = localStorage.getItem('register') ?? false
+    if (reg) localStorage.removeItem('register')
+    setRegSuccess(reg)
+  }, [])
 
   return (
     <>
@@ -44,10 +51,11 @@ export default function Login({ toggleSignUp }) {
             )}
           </div>
         </div>
+        {regSuccess && <span className="text-red-500 text-sm">Register Successfully</span>}
         <div className="flex items-center justify-between mb-4">
           <div>
             <Input type="checkbox" id="flexCheckChecked" />
-            <label className="ml-1" htmlFor="flexCheckChecked">
+            <label className="ml-1 select-none" htmlFor="flexCheckChecked">
               Remember
             </label>
           </div>
