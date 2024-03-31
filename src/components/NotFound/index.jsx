@@ -8,7 +8,7 @@ export default function NotFound() {
       <Link
         type="button"
         className="mt-10 border-2 border-cyan-500 hover:bg-cyan-200 rounded-lg py-1 px-3 m-3"
-        to="/home"
+        to="/"
       >
         Home
       </Link>

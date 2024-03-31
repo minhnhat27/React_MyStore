@@ -13,6 +13,7 @@ const Input = forwardRef(
       name,
       checked,
       value,
+      disabled,
     },
     ref,
   ) => {
@@ -20,6 +21,7 @@ const Input = forwardRef(
       <input
         id={id}
         value={value}
+        disabled={disabled}
         name={name}
         onClick={onClick}
         className={className}

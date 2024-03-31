@@ -1,13 +1,13 @@
-export const actionLogin = {
+export const LOGIN = {
   type: 'LOGIN',
 }
 
-export const actionLogout = {
+export const LOGOUT = {
   type: 'LOGOUT',
 }
 
-const actions = {
-  actionLogin,
-  actionLogout,
+const authActions = {
+  LOGIN,
+  LOGOUT,
 }
-export default actions
+export default authActions

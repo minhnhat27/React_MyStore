@@ -1,28 +1,54 @@
 import Button from '../../components/UI/Button'
 import Input from '../../components/UI/Input'
+import authService from '../../services/authService'
+import InsideLoading from '../Loading/InsideLoading'
+import { useAuth } from '../../App'
+import authAction from '../../services/authAction'
 
 import { BsEye, BsEyeSlash } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 
-export default function Login({ toggleSignUp }) {
+export default function Login({ toggleSignUp, regSuccess, setRegSuccess, closeLogin }) {
+  const { dispatch } = useAuth()
+
   const [showPassword, setShowPassword] = useState(false)
-  const [regSuccess, setRegSuccess] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword)
   }
 
-  useEffect(() => {
-    const reg = localStorage.getItem('register') ?? false
-    if (reg) localStorage.removeItem('register')
-    setRegSuccess(reg)
-  }, [])
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    setError,
+    formState: { errors },
+  } = useForm()
+
+  const handleSubmitLogin = () => {
+    setLoading(true)
+    setRegSuccess(false)
+    authService
+      .login(getValues())
+      .then(() => {
+        setLoading(false)
+        dispatch(authAction.LOGIN)
+        closeLogin()
+      })
+      .catch((err) => {
+        setLoading(false)
+        err.response && setError('password', { message: err.response.data })
+      })
+  }
 
   return (
     <>
+      {loading && <InsideLoading />}
       <p className="text-center font-bold text-xl">Sign In To React</p>
-      <form method="POST">
+      <form method="POST" onSubmit={handleSubmit(handleSubmitLogin)}>
         <div className="my-3">
           <Input
             type="email"
@@ -30,28 +56,35 @@ export default function Login({ toggleSignUp }) {
             className="w-full p-2 border-2 rounded-md focus:outline-blue-500"
             placeholder="Email"
             id="email"
+            {...register('email', { required: 'Email is required' })}
           />
+          <span className="text-red-500">{errors.email && errors.email.message}</span>
         </div>
-        <div className="my-3 flex">
-          <Input
-            type={showPassword ? 'text' : 'password'}
-            className="w-full p-2 border-2 rounded-md focus:outline-blue-500"
-            placeholder="Password"
-            name="password"
-            id="password"
-          />
-          <div
-            onClick={handleShowPassword}
-            className="flex justify-around items-center cursor-pointer"
-          >
-            {showPassword ? (
-              <BsEyeSlash className="absolute mr-10" size={20} />
-            ) : (
-              <BsEye className="absolute mr-10" size={20} />
-            )}
+        <div className="my-3">
+          <div className="flex">
+            <Input
+              type={showPassword ? 'text' : 'password'}
+              className="w-full p-2 border-2 rounded-md focus:outline-blue-500"
+              placeholder="Password"
+              name="password"
+              id="password"
+              {...register('password', { required: 'Password is required' })}
+            />
+            <div
+              onClick={handleShowPassword}
+              className="flex justify-around items-center cursor-pointer"
+            >
+              {showPassword ? (
+                <BsEyeSlash className="absolute mr-10" size={20} />
+              ) : (
+                <BsEye className="absolute mr-10" size={20} />
+              )}
+            </div>
           </div>
+          <span className="text-red-500">
+            {errors.password && errors.password.message} {regSuccess && 'Register Successfully'}
+          </span>
         </div>
-        {regSuccess && <span className="text-red-500 text-sm">Register Successfully</span>}
         <div className="flex items-center justify-between mb-4">
           <div>
             <Input type="checkbox" id="flexCheckChecked" />

@@ -1,11 +1,19 @@
-import { Link } from 'react-router-dom'
 import Button from '../../UI/Button'
 import Image from '../../UI/Image'
 import Wrapper from '../../Wrapper'
+import { useAuth } from '../../../App'
+
 import Tippy from '@tippyjs/react/headless'
+import { Link } from 'react-router-dom'
 import { BsBell, BsCart } from 'react-icons/bs'
+import authActions from '../../../services/authAction'
 
 export default function NavUser({ isAuthenticated, toggleSignIn, toggleSignUp }) {
+  const { dispatch } = useAuth()
+  const handleLogout = () => {
+    dispatch(authActions.LOGOUT)
+  }
+
   return (
     <>
       {isAuthenticated ? (
@@ -28,7 +36,7 @@ export default function NavUser({ isAuthenticated, toggleSignIn, toggleSignUp })
             placement="top-end"
             render={(attrs) => (
               <div className="w-48 z-10" tabIndex="-1" {...attrs}>
-                <Wrapper className="p-1">
+                <Wrapper className="p-1 rounded-sm">
                   <Link
                     className="block rounded-md p-2 text-sm text-gray-700 hover:bg-slate-300"
                     role="menuitem"
@@ -47,6 +55,7 @@ export default function NavUser({ isAuthenticated, toggleSignIn, toggleSignUp })
                     className="block rounded-md p-2 text-sm text-gray-700 hover:bg-slate-300"
                     role="menuitem"
                     id="user-menu-item-2"
+                    onClick={handleLogout}
                   >
                     Sign Out
                   </Link>

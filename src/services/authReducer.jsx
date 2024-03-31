@@ -1,23 +1,16 @@
-// const user = AuthService.getCurrentUser()
-export const initialState = {
-  isAuthenticated: false,
-}
-// user !== null
-//   ? {
-//       isAuthenticated: true,
-//     }
-//   : {
-//       isAuthenticated: false,
-//       // currentUser: null,
-//     }
+import authService from './authService'
 
+const user = authService.getCurrentUser()
+
+export const initialState = {
+  isAuthenticated: user !== undefined,
+}
 export const reducer = (state, action) => {
   switch (action.type) {
     case 'LOGIN':
       return {
         ...state,
         isAuthenticated: true,
-        // currentUser: action.payload,
       }
     case 'LOGOUT':
       return {

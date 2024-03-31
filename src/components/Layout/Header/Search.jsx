@@ -98,7 +98,7 @@ export default function Search() {
             onClick={() => setIsSearchExpand(true)}
             onChange={(e) => handleSearch(e)}
             value={textSearch}
-            className="border outline-blue-200 lg:w-72 md:w-52 w-48 rounded-full py-1 px-10"
+            className="outline-none focus:outline focus:outline-1 focus:outline-blue-300 lg:w-72 md:w-52 w-48 rounded-full py-1 px-10"
             placeholder="Search"
             ref={searchRef}
           />

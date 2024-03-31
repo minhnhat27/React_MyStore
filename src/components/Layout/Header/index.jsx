@@ -22,6 +22,7 @@ export default function Header({ className }) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [isSignIn, setIsSignIn] = useState(false)
   const [isSignUp, setIsSignUp] = useState(false)
+  const [regSuccess, setRegSuccess] = useState(false)
   const nodeRef = useRef(null)
 
   const handleCloseForm = () => {
@@ -73,7 +74,7 @@ export default function Header({ className }) {
   return (
     <>
       <div className={`${className} md:px-14 px-2 py-4 w-full`}>
-        <nav id="nav" className="border bg-white opacity-80 rounded-2xl">
+        <nav id="nav" className="border bg-white bg-opacity-80 rounded-2xl">
           <div className="relative px-4 h-12 flex items-center justify-between">
             <div className="relative left-0 flex items-center md:hidden">
               <Button
@@ -122,6 +123,7 @@ export default function Header({ className }) {
         classNames="showSignIn"
         timeout={1000}
         unmountOnExit
+        onExit={() => setRegSuccess(false)}
       >
         <div ref={nodeRef} className="fixed w-full z-50">
           <div className="relative min-h-screen flex items-center justify-center">
@@ -146,8 +148,15 @@ export default function Header({ className }) {
                 <div className="relative flex items-center justify-center">
                   <Image width="70" height="70" className="py-2 fs-4" src={logo} alt="logo" />
                 </div>
-                {isSignIn && <Login toggleSignUp={toggleSignUp} />}
-                {isSignUp && <Register toggleSignIn={toggleSignIn} />}
+                {isSignIn && (
+                  <Login
+                    toggleSignUp={toggleSignUp}
+                    regSuccess={regSuccess}
+                    setRegSuccess={setRegSuccess}
+                    closeLogin={handleCloseForm}
+                  />
+                )}
+                {isSignUp && <Register toggleSignIn={toggleSignIn} setRegSuccess={setRegSuccess} />}
               </Wrapper>
             </div>
           </div>
