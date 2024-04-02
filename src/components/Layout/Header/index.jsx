@@ -15,7 +15,7 @@ import Offcanvas from './Offcanvas'
 import NavUser from './NavUser'
 import { navigation } from '../../../services/routes'
 
-export default function Header({ className }) {
+export default function Header() {
   const { state } = useAuth()
   const isAuthenticated = state.isAuthenticated
 
@@ -73,48 +73,44 @@ export default function Header({ className }) {
 
   return (
     <>
-      <div className={`${className} md:px-14 px-2 py-4 w-full`}>
-        <nav id="nav" className="border bg-white bg-opacity-80 rounded-2xl">
-          <div className="relative px-4 h-12 flex items-center justify-between">
-            <div className="relative left-0 flex items-center md:hidden">
-              <Button
-                onClick={toggleNavbar}
-                className="relative inline-flex items-center justify-center rounded-full p-2 cursor-pointer text-gray-400 hover:bg-slate-400 hover:text-white"
-              >
-                <BsList className="text-2xl" />
-              </Button>
+      <nav className="nav h-20 md:px-10 px-2 z-30 sticky top-0 bg-slate-200 flex items-center justify-between">
+        <div className="left-0 flex items-center md:hidden">
+          <Button
+            onClick={toggleNavbar}
+            className="relative inline-flex items-center justify-center rounded-full p-2 cursor-pointer text-gray-400 hover:bg-slate-400 hover:text-white"
+          >
+            <BsList className="text-2xl" />
+          </Button>
+        </div>
+        <div className="hidden md:block">
+          <div className="relative flex items-center justify-start">
+            <div className="flex flex-shrink-0 items-center">
+              <Image className="h-8 w-auto" src={logo} alt="React" />
             </div>
-            <div className="hidden md:block">
-              <div className="relative flex items-center justify-start">
-                <div className="flex flex-shrink-0 items-center">
-                  <Image className="h-8 w-auto" src={logo} alt="React" />
-                </div>
-                <div className="flex space-x-2 md:ml-2">
-                  {navigation.map((item, i) => (
-                    <NavLink
-                      key={i}
-                      to={item.to}
-                      className="rounded-full transition ease-in-out px-3 py-2 text-sm font-medium hover:bg-emerald-100"
-                    >
-                      {item.name}
-                    </NavLink>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div className="relative right-0 flex items-center">
-              <div>
-                <Search />
-              </div>
-              <NavUser
-                isAuthenticated={isAuthenticated}
-                toggleSignIn={toggleSignIn}
-                toggleSignUp={toggleSignUp}
-              />
+            <div className="flex space-x-2 md:ml-2">
+              {navigation.map((item, i) => (
+                <NavLink
+                  key={i}
+                  to={item.to}
+                  className="rounded-full transition ease-in-out px-3 py-2 text-sm font-medium hover:bg-sky-300"
+                >
+                  {item.name}
+                </NavLink>
+              ))}
             </div>
           </div>
-        </nav>
-      </div>
+        </div>
+        <div className="relative right-0 flex items-center">
+          <div>
+            <Search />
+          </div>
+          <NavUser
+            isAuthenticated={isAuthenticated}
+            toggleSignIn={toggleSignIn}
+            toggleSignUp={toggleSignUp}
+          />
+        </div>
+      </nav>
 
       {/* Login --- Register */}
       <CSSTransition
@@ -125,10 +121,13 @@ export default function Header({ className }) {
         unmountOnExit
         onExit={() => setRegSuccess(false)}
       >
-        <div ref={nodeRef} className="fixed w-full z-50">
-          <div className="relative min-h-screen flex items-center justify-center">
-            <div className="overflow-auto flex items-center justify-center lg:w-2/5 md:w-1/2 sm:w-3/4 w-11/12">
-              <Wrapper className="mb-0 px-10 py-5 rounded-sm">
+        <div>
+          <div
+            ref={nodeRef}
+            className="fixed top-0 w-full z-50 min-h-screen flex items-center justify-center"
+          >
+            <div className="overflow-auto shadow shadow-slate-300 flex items-center justify-center lg:w-2/5 md:w-1/2 sm:w-3/4 w-11/12">
+              <Wrapper className="mb-0 px-10 py-5 rounded-sm bg-zinc-50">
                 <div className={`flex ${isSignUp ? 'justify-between' : 'justify-end'}`}>
                   {isSignUp && (
                     <div

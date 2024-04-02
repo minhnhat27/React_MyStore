@@ -1,13 +1,13 @@
 import Button from '../../components/UI/Button'
 import Input from '../../components/UI/Input'
 import authService from '../../services/authService'
-import InsideLoading from '../Loading/InsideLoading'
+import Loading from '../Loading'
 import { useAuth } from '../../App'
 import authAction from '../../services/authAction'
 
 import { BsEye, BsEyeSlash } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 export default function Login({ toggleSignUp, regSuccess, setRegSuccess, closeLogin }) {
@@ -46,7 +46,7 @@ export default function Login({ toggleSignUp, regSuccess, setRegSuccess, closeLo
 
   return (
     <>
-      {loading && <InsideLoading />}
+      {loading && <Loading />}
       <p className="text-center font-bold text-xl">Sign In To React</p>
       <form method="POST" onSubmit={handleSubmit(handleSubmitLogin)}>
         <div className="my-3">

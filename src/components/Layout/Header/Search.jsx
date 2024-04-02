@@ -53,8 +53,8 @@ export default function Search() {
         onClickOutside={() => setIsSearchExpand(false)}
         placement="bottom-end"
         render={(attrs) => (
-          <div className="lg:w-72 md:w-52 w-48" tabIndex="-1" {...attrs}>
-            <Wrapper className="p-2 max-h-80 rounded-sm">
+          <div className="lg:w-72 md:w-52 w-64" tabIndex="-1" {...attrs}>
+            <Wrapper className="p-2 max-h-80 rounded-sm bg-white">
               {searchResult.length > 0 && (
                 <>
                   <div className="flex items-center">
@@ -86,11 +86,11 @@ export default function Search() {
           </div>
         )}
       >
-        <div className="flex items-center">
+        <div className="flex items-center relative">
           <BsSearch className="w-5 h-5 text-slate-500 hover:text-slate-600 absolute ms-3 top-1/2 transform -translate-y-1/2" />
           {textSearch.length > 0 && (
             <Button type="button" onClick={() => clearSearch()}>
-              <BsX className="w-6 h-6 text-2xl text-slate-500 lg:ms-64 md:ms-44 ms-40 absolute top-1/2 transform -translate-y-1/2" />
+              <BsX className="w-6 h-6 text-2xl text-slate-500 end-0 absolute top-1/2 transform -translate-y-1/2" />
             </Button>
           )}
           <Input
@@ -98,7 +98,7 @@ export default function Search() {
             onClick={() => setIsSearchExpand(true)}
             onChange={(e) => handleSearch(e)}
             value={textSearch}
-            className="outline-none focus:outline focus:outline-1 focus:outline-blue-300 lg:w-72 md:w-52 w-48 rounded-full py-1 px-10"
+            className="focus:outline-sky-500 lg:w-72 md:w-52 xs:w-64 w-full rounded-full py-1 px-10"
             placeholder="Search"
             ref={searchRef}
           />

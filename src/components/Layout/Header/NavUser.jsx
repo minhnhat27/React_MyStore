@@ -4,61 +4,65 @@ import Wrapper from '../../Wrapper'
 import { useAuth } from '../../../App'
 
 import Tippy from '@tippyjs/react/headless'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { BsBell, BsCart } from 'react-icons/bs'
 import authActions from '../../../services/authAction'
+import authService from '../../../services/authService'
 
 export default function NavUser({ isAuthenticated, toggleSignIn, toggleSignUp }) {
   const { dispatch } = useAuth()
   const handleLogout = () => {
     dispatch(authActions.LOGOUT)
+    authService.logout()
   }
 
   return (
     <>
       {isAuthenticated ? (
-        <div className="flex justify-between">
+        <div className="flex justify-between cart">
           <Button
             type="button"
-            className="rounded-full bg-green-200 p-1 text-gray-500 ring-1 ring-blue-300 ms-2"
+            className="rounded-full bg-white p-1 text-gray-500 ring-1 ring-blue-300 ms-2"
           >
             <BsBell className="p-1 text-2xl" />
           </Button>
-          <Link
+          <NavLink
             to="/cart"
-            className="rounded-full bg-green-200 p-1 text-gray-500 ring-1 ring-blue-300 mx-2"
+            className="rounded-full bg-white p-1 text-gray-500 ring-1 ring-blue-300 mx-2"
           >
             <BsCart className="p-1 text-2xl" />
-          </Link>
+          </NavLink>
           <Tippy
             interactive
             trigger="click"
             placement="top-end"
             render={(attrs) => (
               <div className="w-48 z-10" tabIndex="-1" {...attrs}>
-                <Wrapper className="p-1 rounded-sm">
-                  <Link
-                    className="block rounded-md p-2 text-sm text-gray-700 hover:bg-slate-300"
+                <Wrapper className="p-1 rounded-sm bg-white">
+                  <NavLink
+                    to="/profile"
+                    className="block rounded-sm p-2 text-sm text-gray-700 hover:bg-slate-300"
                     role="menuitem"
                     id="user-menu-item-0"
                   >
                     Your Profile
-                  </Link>
-                  <Link
-                    className="block rounded-md p-2 text-sm text-gray-700 hover:bg-slate-300"
+                  </NavLink>
+                  <NavLink
+                    to="/settings"
+                    className="block rounded-sm p-2 text-sm text-gray-700 hover:bg-slate-300"
                     role="menuitem"
                     id="user-menu-item-1"
                   >
                     Settings
-                  </Link>
-                  <Link
-                    className="block rounded-md p-2 text-sm text-gray-700 hover:bg-slate-300"
+                  </NavLink>
+                  <Button
+                    className="block rounded-sm p-2 text-sm text-gray-700 hover:bg-slate-300"
                     role="menuitem"
                     id="user-menu-item-2"
                     onClick={handleLogout}
                   >
                     Sign Out
-                  </Link>
+                  </Button>
                 </Wrapper>
               </div>
             )}
@@ -70,7 +74,7 @@ export default function NavUser({ isAuthenticated, toggleSignIn, toggleSignUp })
               >
                 <Image
                   className="w-8 rounded-full"
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  src="https://png.pngtree.com/png-clipart/20191122/original/pngtree-user-icon-isolated-on-abstract-background-png-image_5192004.jpg"
                   alt=""
                 />
               </Button>

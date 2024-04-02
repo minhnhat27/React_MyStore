@@ -2,9 +2,10 @@ import { Route } from 'react-router-dom'
 import { Fragment } from 'react'
 
 import DefaultLayout from '../components/Layout/DefaultLayout'
-import HomeLayout from '../components/Layout/HomeLayout'
 import Home from '../pages/Home'
 import Cart from '../pages/Cart'
+import Products from '../pages/Products'
+import ProductDetail from '../pages/ProductDetail'
 
 export const navigation = [
   { name: 'Home', to: '/' },
@@ -13,7 +14,11 @@ export const navigation = [
   { name: 'Contact', to: '/contact' },
 ]
 
-export const publicRoutes = [{ path: '/', component: Home, layout: HomeLayout }]
+export const publicRoutes = [
+  { path: '/', component: Home },
+  { path: '/products', component: Products },
+  { path: '/products/product-detail', component: ProductDetail },
+]
 
 export const privateRoutes = [{ path: '/cart', component: Cart }]
 

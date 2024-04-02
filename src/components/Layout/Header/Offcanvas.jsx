@@ -1,5 +1,5 @@
 import { BsX } from 'react-icons/bs'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import Button from '../../UI/Button'
 
 export default function Offcanvas({
@@ -10,12 +10,12 @@ export default function Offcanvas({
   toggleSignIn,
 }) {
   return (
-    <div
+    <nav
       className={`${
         isExpanded ? '-translate-x-0' : '-translate-x-full'
-      } md:hidden duration-500 fixed top-0 left-0 w-screen z-10`}
+      } md:hidden nav duration-500 fixed top-0 left-0 w-screen z-30`}
     >
-      <div className="sm:w-1/2 w-4/5 bg-white shadow-lg h-screen">
+      <div className="sm:w-1/2 w-4/5 bg-zinc-200 shadow-lg h-screen">
         <div className="flex justify-end">
           <span
             onClick={toggleNavbar}
@@ -35,21 +35,19 @@ export default function Offcanvas({
               </Button>
             )}
             {navigation.map((item, i) => (
-              <Link
+              <NavLink
                 key={i}
                 to={item.to}
                 className={`${
-                  item.current
-                    ? 'bg-emerald-500 text-white'
-                    : 'hover:bg-emerald-200'
+                  item.current ? 'bg-emerald-500 text-white' : 'hover:bg-emerald-200'
                 } rounded-md block transition ease-in-out px-3 py-2 text-base font-medium`}
               >
                 {item.name}
-              </Link>
+              </NavLink>
             ))}
           </div>
         </div>
       </div>
-    </div>
+    </nav>
   )
 }

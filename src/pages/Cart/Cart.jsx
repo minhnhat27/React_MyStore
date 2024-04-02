@@ -12,7 +12,7 @@ export default function Cart() {
       name: 'Iphone 14 Pro Max 256Gb Gold',
       price: 100000,
       discountPercent: 2,
-      quantity: 1,
+      quantity: 2,
     },
     { id: 2, name: 'DT2', price: 200000, discountPercent: 2, quantity: 1 },
     { id: 3, name: 'DT3', price: 500000, discountPercent: 2, quantity: 1 },
@@ -38,16 +38,14 @@ export default function Cart() {
   } else if (cartItems.length === 0) {
     return (
       <>
-        <div className="">
-          <div className="h-96 flex flex-col items-center justify-center">
-            <div className="text-2xl">Giỏ hàng chưa có sản phẩm nào</div>
-            <Link
-              className="mt-3 border-2 py-1 px-2 rounded-lg border-emerald-500 bg-emerald-100 hover:bg-emerald-200"
-              to="/products"
-            >
-              Mua sắm ngay
-            </Link>
-          </div>
+        <div className="h-96 flex flex-col items-center justify-center">
+          <div className="text-2xl">Shopping cart is empty</div>
+          <Link
+            className="mt-3 border p-2 rounded-lg text-slate-100 bg-sky-400 hover:bg-sky-500"
+            to="/products"
+          >
+            Shopping now
+          </Link>
         </div>
       </>
     )

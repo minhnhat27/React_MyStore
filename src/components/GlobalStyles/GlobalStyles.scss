@@ -19,9 +19,11 @@ input::-webkit-inner-spin-button {
 
 body {
   line-height: 1.5;
+  background-color: #efefef;
   text-rendering: optimizeSpeed;
   &::-webkit-scrollbar {
-    width: 8px;
+    width: 5px;
+    height: 5px;
   }
   &::-webkit-scrollbar-track {
     background: white;
@@ -61,6 +63,30 @@ body.no-scroll {
   transition: opacity 300ms, transform 300ms;
 }
 
-#nav a.active {
-  background-color: aqua;
+.nav a.active,
+.cart a.active {
+  background-color: rgb(14, 165, 233);
+  color: white;
+}
+
+.each-slide-effect > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20rem;
+}
+
+.each-slide-effect span {
+  padding: 20px;
+  font-size: 20px;
+  background: #efefef;
+  text-align: center;
+}
+
+.indicators {
+  margin-top: 0.3rem !important;
+}
+
+.indicator.active {
+  background: #000;
 }
